@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>movie tv form</h1>
+    <form action="">
+       
+      <input type="search" name="search" id="sub">
+      <input type="submit" value="click to submit" >
+
+    </form>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <script>
+        const newform =document.querySelector("form")
+        const submitform =document.querySelector("#sub")
+        newform.addEventListener("submit",async function (e){
+            e.preventDefault()
+          const newsearch=(newform.elements.search.value)
+          newform.elements.search.value=" "
+          const config ={params:{q:newsearch}}
+          const newapi =await axios.get("https://api.tvmaze.com/search/shows",config)
+          makeimages(newapi.data)
+           
+s
+        })
+      const makeimages =(shows) =>{
+        for(let result of shows){
+           if(result.show.image){
+            const newimg =document.createElement("IMG")
+             newimg.src =result.show.image.medium
+             document.body.append(newimg)
+
+           }
+        }
+      }
+    </script>
+</body>
+</html>
